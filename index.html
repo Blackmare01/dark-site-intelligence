@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Dark-site Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            font-family: 'kode-mono';
+            color: #fff;
+        }
+
+        /* Navigation */
+        .navbar {
+            border-bottom: 2px solid #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-search {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-search input {
+            padding: 8px 15px;
+            background: #000;
+            border: 2px solid #fff;
+            color: #fff;
+            font-family: 'kode-mono';
+            width: 300px;
+        }
+
+        .nav-search input:focus {
+            outline: none;
+            border-style: dotted;
+        }
+
+        .nav-search button {
+            padding: 8px 20px;
+            background: #000;
+            border: 2px solid #fff;
+            color: #fff;
+            font-family: 'kode-mono';
+            cursor: pointer;
+        }
+
+        .nav-search button:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            border: 2px dotted #fff;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            padding-top: 70px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        /* Left Sidebar */
+        .sidebar-left {
+            width: 250px;
+            position: fixed;
+            top: 70px;
+            left: 20px;
+        }
+
+        .menu-panel {
+            border: 2px solid #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .menu-panel h3 {
+            border-bottom: 2px dotted #fff;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 10px 0;
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px dotted #333;
+        }
+
+        .menu-item:hover {
+            border-bottom: 1px dotted #fff;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Feed Area */
+        .feed {
+            margin-left: 300px;
+            margin-right: 280px;
+            max-width: 700px;
+        }
+
+        /* Post Create */
+        .post-create {
+            border: 2px solid #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .post-create h3 {
+            margin-bottom: 15px;
+        }
+
+        .post-create textarea {
+            width: 100%;
+            min-height: 100px;
+            background: #000;
+            border: 2px solid #fff;
+            color: #fff;
+            font-family: 'kode-mono';
+            padding: 10px;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+
+        .post-create textarea:focus {
+            outline: none;
+            border-style: dotted;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-btn {
+            padding: 10px 30px;
+            background: #000;
+            border: 2px solid #fff;
+            color: #fff;
+            font-family: 'kode-mono';
+            cursor: pointer;
+        }
+
+        .post-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Post */
+        .post {
+            border: 2px solid #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            border-bottom: 2px dotted #333;
+            padding-bottom: 15px;
+        }
+
+        .post-avatar {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .post-user {
+            flex: 1;
+        }
+
+        .post-user .username {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .post-user .handle {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 30px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Right Sidebar */
+        .sidebar-right {
+            width: 250px;
+            position: fixed;
+            top: 70px;
+            right: 20px;
+        }
+
+        .trending-panel, .follow-panel {
+            border: 2px solid #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .trending-panel h3, .follow-panel h3 {
+            border-bottom: 2px dotted #fff;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .trending-item {
+            padding: 10px 0;
+            border-bottom: 1px dotted #333;
+        }
+
+        .trending-item:last-child {
+            border-bottom: none;
+        }
+
+        .trending-tag {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .trending-count {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .follow-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px dotted #333;
+        }
+
+        .follow-item:last-child {
+            border-bottom: none;
+        }
+
+        .follow-avatar {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .follow-info {
+            flex: 1;
+        }
+
+        .follow-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .follow-btn {
+            padding: 5px 15px;
+            background: #000;
+            border: 2px solid #fff;
+            color: #fff;
+            font-family: 'kode-mono';
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .follow-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-logo">DARK-SITE INTELLIGENCE</div>
+        <div class="nav-search">
+            <input type="text" placeholder="Search hackers...">
+            <button>[ SCAN ]</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="#">PROFILE</a>
+            <a href="#">MESSAGES</a>
+            <a href="#">NOTIFICATIONS</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar-left">
+            <div class="menu-panel">
+                <h3>// MENU</h3>
+                <a href="index.html" class="menu-item">> Home</a>
+                <a href="#" class="menu-item">> Explore</a>
+                <a href="#" class="menu-item">> My Profile</a>
+                <a href="#" class="menu-item">> Messages</a>
+                <a href="#" class="menu-item">> Bookmarks</a>
+            </div>
+            <div class="menu-panel">
+                <h3>// WANTED</h3>
+                <a href="hackers/lucky12345.html" class="menu-item">> Evgeniy Bogachev ($3M)</a>
+                <a href="hackers/wazawaka.html" class="menu-item">> Mikhail Matveev ($10M)</a>
+                <a href="hackers/rim-jong-hyok.html" class="menu-item">> Rim Jong Hyok ($10M)</a>
+            </div>
+        </aside>
+
+        <!-- Feed -->
+        <main class="feed">
+            <!-- Post Create -->
+            <div class="post-create">
+                <h3>>_New_Intel</h3>
+                <textarea placeholder="Share intelligence..."></textarea>
+                <div class="post-actions">
+                    <span>Upload | Code | Location</span>
+                    <button class="post-btn">[ BROADCAST ]</button>
+                </div>
+            </div>
+
+            <!-- Post 1 -->
+            <article class="post">
+                <div class="post-header">
+                    <div class="post-avatar">EB</div>
+                    <div class="post-user">
+                        <div class="username">Evgeniy Bogachev</div>
+                        <div class="handle">@lucky12345</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>Status update: Operations running smoothly. New partnership formed with eastern european team. Gameover ZeuS 2.0 in development.</p>
+                </div>
+                <div class="post-stats">
+                    <span>♥ 1,247 likes</span>
+                    <span>↻ 89 shares</span>
+                    <span>◷ 2 hours ago</span>
+                </div>
+            </article>
+
+            <!-- Post 2 -->
+            <article class="post">
+                <div class="post-header">
+                    <div class="post-avatar">MM</div>
+                    <div class="post-user">
+                        <div class="username">Mikhail Matveev</div>
+                        <div class="handle">@wazawaka</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>Just evaded another FBI takedown. They think they can trace us through compromised servers. Think again. #LockBit still alive.</p>
+                </div>
+                <div class="post-stats">
+                    <span>♥ 2,891 likes</span>
+                    <span>↻ 456 shares</span>
+                    <span>◷ 5 hours ago</span>
+                </div>
+            </article>
+
+            <!-- Post 3 -->
+            <article class="post">
+                <div class="post-header">
+                    <div class="post-avatar">MY</div>
+                    <div class="post-user">
+                        <div class="username">Maksim Yakubets</div>
+                        <div class="handle">@aqua</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>Evil Corp doesn't stop. Dridex is back with new evasion techniques. Financial sector beware.</p>
+                </div>
+                <div class="post-stats">
+                    <span>♥ 5,234 likes</span>
+                    <span>↻ 712 shares</span>
+                    <span>◷ 1 day ago</span>
+                </div>
+            </article>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar-right">
+            <div class="trending-panel">
+                <h3>// TRENDING</h3>
+                <div class="trending-item">
+                    <div class="trending-tag">#GameoverZeuS</div>
+                    <div class="trending-count">12.4K posts</div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-tag">#EvilCorp</div>
+                    <div class="trending-count">8.7K posts</div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-tag">#LockBit</div>
+                    <div class="trending-count">6.2K posts</div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-tag">#Dridex</div>
+                    <div class="trending-count">4.1K posts</div>
+                </div>
+            </div>
+            <div class="follow-panel">
+                <h3>// WHO TO FOLLOW</h3>
+                <div class="follow-item">
+                    <div class="follow-avatar">AB</div>
+                    <div class="follow-info">
+                        <div class="follow-name">Aleksey Belan</div>
+                    </div>
+                    <button class="follow-btn">+</button>
+                </div>
+                <div class="follow-item">
+                    <div class="follow-avatar">P</div>
+                    <div class="follow-info">
+                        <div class="follow-name">Park Jin Hyok</div>
+                    </div>
+                    <button class="follow-btn">+</button>
+                </div>
+                <div class="follow-item">
+                    <div class="follow-avatar">DB</div>
+                    <div class="follow-info">
+                        <div class="follow-name">Dmitriy Badin</div>
+                    </div>
+                    <button class="follow-btn">+</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
